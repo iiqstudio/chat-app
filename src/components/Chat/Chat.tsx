@@ -22,6 +22,7 @@ const Chat = () => {
     const [inputValue, setInputValue] = useState('');
     const chatWindowRef = useRef(null);
 
+
     const isMobile = useMediaQuery('(max-width:768px)');
 
     const handleSend = () => {
