@@ -2,8 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { Box, Typography, TextField, Button, Paper, styled, useMediaQuery } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-// Стилизованный компонент для сообщения (бабл)
-const Bubble = styled(Paper)(({ theme, isUser }) => ({
+interface BubbleProps {
+    isUser: boolean;
+    children: React.ReactNode;
+}
+
+const Bubble = styled(Paper)<BubbleProps>(({ theme, isUser }: any) => ({
     maxWidth: '75%',
     alignSelf: isUser ? 'flex-end' : 'flex-start',
     backgroundColor: isUser ? theme.palette.primary.main : theme.palette.grey[300],
@@ -34,6 +38,7 @@ const Chat = () => {
 
     useEffect(() => {
         if (chatWindowRef.current) {
+            //@ts-ignore
             chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
         }
     }, [messages]);
@@ -75,7 +80,6 @@ const Chat = () => {
                 Chat
             </Typography>
 
-            {/* Окно чата */}
             <Box
                 ref={chatWindowRef}
                 sx={{
@@ -116,6 +120,7 @@ const Chat = () => {
                     fullWidth
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
+                    //@ts-ignore
                     onKeyDown={handleKeyPress}
                     placeholder="Type a message..."
                     sx={{
